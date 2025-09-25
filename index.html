@@ -61,6 +61,17 @@
                 display: flex !important;
             }
         }
+
+        /* Fade-in animation for sections */
+        .section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="font-[Inter] scroll-smooth">
@@ -102,7 +113,7 @@
     </header>
 
     <!-- About Section -->
-    <section id="about" class="min-h-screen pt-40 md:pt-24 px-6 md:px-24 flex items-center justify-center w-full">
+    <section id="about" class="section min-h-screen pt-40 md:pt-24 px-6 md:px-24 flex items-center justify-center w-full">
         <div class="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-40">
             <img src="image.jpg" alt="Joshua Musanga" class="w-72 md:w-96 rounded-full shadow-lg">
             <div class="flex flex-col items-center text-center gap-6">
@@ -112,10 +123,10 @@
                     <span class="text-xl md:text-3xl font-semibold gradient-text">Frontend Developer</span>
                 </div>
                 <div class="flex gap-4 justify-center">
-                    <a href="#" class="px-6 py-2 rounded-full border-2 border-black font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white">
+                    <a href="CV Joshua musanga.pdf" download class="px-6 py-2 rounded-full border-2 border-black font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white">
                         Download CV
                     </a>
-                    <a href="#" class="px-6 py-2 rounded-full border-2 border-black font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white">
+                    <a href="#contact" class="px-6 py-2 rounded-full border-2 border-black font-medium whitespace-nowrap transition-all duration-200 hover:bg-black hover:text-white">
                         Contact
                     </a>
                 </div>
@@ -132,7 +143,7 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative">
+    <section id="experience" class="section min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative">
         <h2 class="text-center text-5xl font-semibold mb-12">Experience</h2>
         <div class="flex flex-col-reverse md:flex-row items-center justify-center gap-10 md:gap-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -166,7 +177,7 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative">
+    <section id="projects" class="section min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative">
         <h2 class="text-center text-5xl font-semibold mb-12">Recent Projects</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- Project Card 1 -->
@@ -217,7 +228,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative" id="contact">
+    <section class="section min-h-screen pt-24 md:pt-48 px-6 md:px-24 w-full relative" id="contact">
         <h1 class="text-center text-5xl font-semibold mb-12">Contact Me</h1>
         <div class="flex flex-col items-center gap-8 mt-20">
             <div class="relative w-full max-w-lg">
@@ -249,57 +260,6 @@
         <p class="font-light mt-4 text-sm md:text-base text-center">@ All Rights Reserved | Joshua Musanga</p>
     </footer>
 
-    <script>
-        const menuIcon = document.getElementById('menu-icon');
-        const navLinks = document.querySelector('.nav-links');
-
-        menuIcon.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        const allNavLinks = document.querySelectorAll('header .nav-link-style, footer .nav-link-style');
-        
-        const sections = document.querySelectorAll('section');
-
-        // Smooth scrolling for all internal links
-        allNavLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                // Prevent the default anchor click behavior
-                e.preventDefault();
-                
-                // Get the target element using the href attribute
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    // Use the scrollIntoView method with smooth behavior
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-
-        // IntersectionObserver to highlight the current section link
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const navLink = document.querySelector(`a[href="#${entry.target.id}"]`);
-                if (entry.isIntersecting) {
-                    // Add the 'active' class when the section is visible
-                    navLink.classList.add('active');
-                } else {
-                    // Remove the 'active' class when the section is not visible
-                    navLink.classList.remove('active');
-                }
-            });
-        }, {
-            // Options to fine-tune the observer. `rootMargin` provides a buffer.
-            rootMargin: '-50% 0px -50% 0px' 
-        });
-
-        // Observe each section
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
